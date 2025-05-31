@@ -2,6 +2,8 @@
 
 A modern, cross-platform, dual-pane file manager inspired by Norton Commander, built with Rust, tui-rs, and crossterm.
 
+![Application screen](images/screenshot.png)
+
 ## Overview
 
 Geek Commander brings the classic Norton Commander experience to modern terminals, providing:
