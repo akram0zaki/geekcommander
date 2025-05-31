@@ -1,0 +1,46 @@
+[package]
+name = "geekcommander"
+version = "1.0.5"
+edition = "2021"
+authors = ["Akram Zaki <azpythonprojects@gmail.com>"]
+description = "A cross-platform Norton Commander-style dual-pane file manager for the terminal"
+license = "MIT"
+homepage = "https://github.com/akram0zaki/geekcommander"
+repository = "https://github.com/akram0zaki/geekcommander"
+keywords = ["file-manager", "terminal", "tui", "norton-commander"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+tui = "0.19"
+crossterm = "0.27"
+thiserror = "1.0"
+fern = "0.6"
+chrono = { version = "0.4", features = ["serde"] }
+zip = "0.6"
+tar = "0.4"
+clap = { version = "4.0", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+ini = "1.3"
+walkdir = "2.3"
+log = "0.4"
+env_logger = "0.10"
+dirs = "5.0"
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["fileapi", "handleapi", "winbase"] }
+
+[dev-dependencies]
+tempfile = "3.8"
+assert_cmd = "2.0"
+predicates = "3.0"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = 'abort'
+strip = true
+
+[features]
+default = []
+static = [] 
