@@ -105,8 +105,6 @@ source ~/.cargo/env
 
 3. Build the project:
 
-For more detailed instructions you can refer to the [Quick Start guide](QUICKSTART.md)
-
 **A. Option 1: Use the Build Scripts (Recommended)** 
 
 **Windows (PowerShell):**
