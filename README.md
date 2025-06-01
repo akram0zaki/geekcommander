@@ -23,9 +23,11 @@ Geek Commander brings the classic Norton Commander experience to modern terminal
 You'll need Rust installed on your system. If you don't have Rust installed:
 
 #### Windows:
-1. Download and run [rustup-init.exe](https://win.rustup.rs/)
+1. Download and run 'rustup' - the official Rust toolchain installer and version manager - from https://www.rust-lang.org/tools/install
 2. Follow the installer prompts (use default options)
 3. Restart your terminal/PowerShell
+
+Alternatively you can download the Windows build [geekcommander.exe](target/release/geekcommander.exe) from the repository. However I do encourage you to create the build yourself following the instructions in this guide.
 
 #### Linux/macOS:
 ```bash
