@@ -37,47 +37,152 @@ source ~/.cargo/env
 
 ### Building from Source
 
-1. Clone or download this repository
-2. Open a terminal in the project directory
+1. **Obtain the repository**
+
+   You have two main options to get the code without needing a GitHub account:
+
+   **A. Clone via Git (no credentials required for public repos)**  
+   - **Windows (PowerShell or Git Bash)**  
+     1. Install Git for Windows if you don’t already have it:  
+        - Download from https://git-scm.com/download/win and run the installer (choose “Use Git from the Windows Command Prompt” or “Git Bash only,” whichever you prefer).  
+     2. Open **Git Bash** (or PowerShell, if you added Git to your PATH).  
+     3. Navigate to the folder where you want to store the project, for example:  
+        ```powershell
+        cd C:\Users\<YourName>\Projects
+        ```  
+     4. Run the clone command (this does not require a GitHub login if the repo is public):  
+        ```bash
+        git clone https://github.com/akram0zaki/geekcommander.git
+        ```  
+     5. Change into the new directory:  
+        ```bash
+        cd geekcommander
+        ```  
+
+   - **Linux (any distro with Git installed)**  
+     1. Make sure Git is installed. On Ubuntu/Debian you can run:  
+        ```bash
+        sudo apt update
+        sudo apt install git
+        ```  
+        On Fedora:  
+        ```bash
+        sudo dnf install git
+        ```  
+     2. Open your terminal and go to the folder where you want to clone:  
+        ```bash
+        cd ~/projects
+        ```  
+     3. Clone the repo (no login needed for a public repository):  
+        ```bash
+        git clone https://github.com/akram0zaki/geekcommander.git
+        ```  
+     4. Enter the directory:  
+        ```bash
+        cd geekcommander
+        ```  
+
+   **B. Download the ZIP archive (no Git needed at all)**  
+   1. Open a web browser and go to:  
+      ```
+      https://github.com/akram0zaki/geekcommander
+      ```  
+   2. Click the green **Code** button (top right) → **Download ZIP**.  
+   3. Extract the downloaded `geekcommander-main.zip` (on Windows: right-click → “Extract All…”; on Linux/macOS: `unzip geekcommander-main.zip`).  
+   4. Rename or move the extracted folder so it’s easy to find. For example:  
+      - On Windows Explorer, extract to `C:\Users\<YourName>\Projects\geekcommander`  
+      - On Linux:  
+        ```bash
+        mkdir -p ~/projects
+        unzip ~/Downloads/geekcommander-main.zip -d ~/projects/
+        mv ~/projects/geekcommander-main ~/projects/geekcommander
+        cd ~/projects/geekcommander
+        ```  
+
+2. **Open a terminal in the project directory**  
+   - If you cloned using Git Bash/PowerShell (Windows) or a regular terminal (Linux), make sure your current working directory is the `geekcommander` folder.  
+   - If you extracted from ZIP, open a terminal (or PowerShell) and `cd` into the folder you unzipped (e.g., `cd geekcommander`).
+
 3. Build the project:
 
+For more detailed instructions you can refer to the [Quick Start guide](QUICKSTART.md)
+
+**A. Option 1: Use the Build Scripts (Recommended)** 
+
+**Windows (PowerShell):**
+```powershell
+# Build debug version
+.\build.ps1
+
+# Build release version (optimized)
+.\build.ps1 -Release
+
+# Build and install to system PATH
+.\build.ps1 -Release -Install
+
+# Show help
+.\build.ps1 -Help
+```
+
+**Linux/macOS:**
 ```bash
-# For development (with debug info)
+# Make script executable
+chmod +x build.sh
+
+# Build debug version
+./build.sh
+
+# Build release version (optimized)
+./build.sh --release
+
+# Build and install to system PATH
+./build.sh --release --install
+
+# Show help
+./build.sh --help
+```
+
+**B. Option 2: Use Cargo Directly** 
+
+```bash
+# Build debug version
 cargo build
 
-# For release (optimized)
+# Build release version
 cargo build --release
+
+# Run directly
+cargo run
+
+# Install to system
+cargo install --path .
 ```
 
 4. Run the application:
 
-```bash
-# Development build
-cargo run
+After building:
 
-# Or run the release binary directly
-./target/release/geekcommander        # Linux/macOS
-.\target\release\geekcommander.exe    # Windows
+**Debug version:**
+```bash
+# Windows
+.\target\debug\geekcommander.exe
+
+# Linux/macOS
+./target/debug/geekcommander
 ```
 
-### Installation Options
-
-#### Option 1: Install with Cargo
+**Release version:**
 ```bash
-cargo install --path .
+# Windows
+.\target\release\geekcommander.exe
+
+# Linux/macOS
+./target/release/geekcommander
 ```
 
-#### Option 2: Copy Binary
-After building, copy the binary to a directory in your PATH:
-
-**Linux/macOS:**
+**If installed to system:**
 ```bash
-sudo cp target/release/geekcommander /usr/local/bin/
-```
-
-**Windows:**
-```powershell
-Copy-Item target\release\geekcommander.exe C:\Windows\System32\
+geekcommander
 ```
 
 ## Usage
@@ -134,6 +239,19 @@ Options:
     --no-color          Force monochrome mode
     -h, --help          Show help information
     -V, --version       Show version information
+```
+
+**Examples**
+
+```bash
+# Start with specific directories
+geekcommander --left /home/user/documents --right /tmp
+
+# Use custom config
+geekcommander --config my-config.ini
+
+# Start in monochrome mode
+geekcommander --no-color
 ```
 
 ## Configuration
@@ -254,20 +372,19 @@ cargo test -- --nocapture
 cargo test test_name
 ```
 
-## Contributing
+## Configuration
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+The application creates a config file at:
+- **Windows**: `%USERPROFILE%\.geekcommanderrc`
+- **Linux/macOS**: `~/.geekcommanderrc`
 
-### Code Style
+You can customize keybindings, colors, and default paths by editing this file.
 
-- Use `cargo fmt` to format code
-- Use `cargo clippy` to check for common issues
-- Follow Rust naming conventions
-- Add tests for new functionality
+## Next Steps
+
+- Read the full [README.md](README.md) for detailed documentation
+- Check out the [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines
+- Report issues or request features on the project repository 
 
 ## License
 
@@ -282,6 +399,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Troubleshooting
 
 ### Common Issues
+
+**If Rust is not found:**
+- Make sure you've installed Rust and restarted your terminal
+- Try running: `rustup update`
+
+**If build fails:**
+- Make sure you have an internet connection (for downloading dependencies)
+- Try: `cargo clean` then rebuild
+
+**If the application doesn't start:**
+- Make sure your terminal supports colors and function keys
+- Try running with `--no-color` flag
 
 **Terminal Size Too Small:**
 ```
